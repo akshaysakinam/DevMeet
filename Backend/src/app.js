@@ -1,19 +1,25 @@
 const express=require("express");
 
 const app=express();
-app.use("/test",(req,res)=>{
-    res.send("Hello from server")
-})
 
-app.use("/hello",(req,res)=>{
-    res.send("Hello from hello");
+app.get("/user",(req,res)=>{
+    res.send({
+        firstname:"Akshay Kumar",
+        lastname:"Sakinam"
+    })
 })
-
-app.use("/",(req,res)=>{
-    res.send("Hello From dashboard");
-    
+app.post("/user",(req,res)=>{
+    //logic for post
+    res.send("Post successful")
 })
-
+app.delete("/user",(req,res)=>{
+    //logic for delete
+    res.send("delete successful")
+})
+app.put("/user",(req,res)=>{
+    //logic for put
+    res.send("Put successful")
+})
 
 
 app.listen(5000,()=>{
