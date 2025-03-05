@@ -7,6 +7,18 @@
 - Create BrowserRouter > Routes > Route=/Body >Route Children
 - Create an Outlet in Body Component
 - Create a footer
+- Create Login Page
+- install axios
+- CORS - install cors in backend => add middleware to app with configurations: origin, credentials:true
+- Whenever making an api call pass axios =>{withCredentials:true}
+- install redux toolkit 
+- configure store => Provider => create slice => add reducer to store
+- Add redux devtools in chrome
+- Login and see if your data is coming in store
+- Navbar should update as soon as user logs in
+- Refactor the code to add constants file and create Components folder
+- you should not able to access other routes without login
+- If token is not present redirect to login page
 
 
 
