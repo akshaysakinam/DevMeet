@@ -19,7 +19,13 @@
 - Refactor the code to add constants file and create Components folder
 - you should not able to access other routes without login
 - If token is not present redirect to login page
-
+- Logout feature
+- Get the feed and add feed in store
+- build the user card on feed
+- Edit Profile feature
+- Show Toast message on save 
+- new page- See all my connections
+- new page: see all my connection requests
 
 
 
