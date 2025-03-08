@@ -26,6 +26,10 @@
 - Show Toast message on save 
 - new page- See all my connections
 - new page: see all my connection requests
+- Feature- Accept/Reject connection requests
+- Send/ Ignore the user card from the feed
+- Signup new user
+- End to end testing
 
 
 
