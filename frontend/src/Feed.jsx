@@ -1,39 +1,45 @@
 import axios from "axios";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { BASE_URL } from "./utils/Constants";
-import { useDispatch, useSelector } from "react-redux";
-import { addFeed } from "./utils/feedSlice";
-import ProfileCard from "./ProfileCard";
+import { useDispatch } from "react-redux";
+import { addFeed, removeUserFromFeed } from "./utils/feedSlice";
+import SwipeCard from "./SwipeCard";
 
 const Feed = () => {
   const dispatch = useDispatch();
-  const feed = useSelector((store) => store.feed);
+  const [feed, setFeed] = useState([]);
 
-  const getFeed = async () => {
-    if (feed) return;
-    try {
-      const res = await axios.get(BASE_URL + "/feed", {
-        withCredentials: true,
-      });
-      dispatch(addFeed(res?.data?.data));
-    } catch (error) {
-      console.log(error);
-    }
-  };
   useEffect(() => {
+    const getFeed = async () => {
+      try {
+        const res = await axios.get(BASE_URL + "/feed", { withCredentials: true });
+        setFeed(res?.data?.data);
+        dispatch(addFeed(res?.data?.data));
+      } catch (error) {
+        console.log(error);
+      }
+    };
     getFeed();
-  }, []);
+  }, [dispatch]);
 
-  if(!feed) return;
+  const handleSwipe = (status, userId) => {
+    axios.post(BASE_URL + "/request/send/" + status + "/" + userId, {}, { withCredentials: true })
+      .then(() => {
+        setFeed(feed.filter(user => user._id !== userId));
+        dispatch(removeUserFromFeed(userId));
+      })
+      .catch(err => console.log(err.response.data));
+  };
 
-  if(feed.length<=0){
-    return <h1 className="flex justify-center">No more users found</h1>
-  }
+  if (feed.length === 0) return <h1 className="flex justify-center">No more users found</h1>;
 
-  return (feed && (
-  <div className="flex justify-center my-10">
-    <ProfileCard user={feed[0]}/>
-  </div>));
+  return (
+    <div className="relative w-full h-screen flex justify-center items-center">
+      {feed.map((user, index) => (
+        <SwipeCard key={user._id} user={user} onSwipe={handleSwipe} />
+      ))}
+    </div>
+  );
 };
 
 export default Feed;
