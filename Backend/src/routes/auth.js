@@ -74,10 +74,13 @@ authRouter.post("/login", async (req, res) => {
 });
 
 authRouter.post("/logout", async (req, res) => {
-  res.cookie("token", null, {
-    expires: new Date(Date.now()),
+  res.clearCookie("token", {
+    httpOnly: true,
+    secure: true,  // Required if using HTTPS (Vercel + Render)
+    sameSite: "None",
   });
-  res.send("Logout Successful");
+
+  res.status(200).json({ message: "Logout Successful" });
 });
 
 module.exports = authRouter;
