@@ -4,12 +4,14 @@ const app = express();
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
 require('dotenv').config();
+const PORT=process.env.PORT||5000
 
 
 app.use(cors({
-  origin:"http://localhost:5173",
-  credentials:true
-}))
+  origin: ["http://localhost:5173", "https://dev-meet-nu.vercel.app"],
+  credentials: true
+}));
+
 app.use(cookieParser());
 app.use(express.json());
 
@@ -26,7 +28,7 @@ app.use('/',userRouter)
 connectDB()
   .then(() => {
     console.log("Database connected succesfully!");
-    app.listen(process.env.PORT, () => {
+    app.listen(PORT, () => {
       console.log("Server is listening on port:5000");
     });
   })
