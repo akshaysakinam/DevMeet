@@ -12,25 +12,41 @@ import Feed from "./Feed.jsx";
 import Connections from "./Connections.jsx";
 import Requests from "./Requests.jsx";
 
+// Import newly created pages
+import AboutUs from "./AboutUs";
+import Contact from "./Contact";
+
+import PrivacyPolicy from "./PrivacyPolicy";
+import TermsOfService from "./TermsOfService";
+import RefundPolicy from "./RefundPolicy";
+import FAQs from "./FAQs";
+
 function App() {
   return (
-    <>
-      <Provider store={appStore}> 
+    <Provider store={appStore}>
       <BrowserRouter basename="/">
         <Routes>
           <Route path="/" element={<Body />}>
-            <Route path="/" element={<Hero/>}></Route>
-            <Route path="/login" element={<Login/>}></Route>
-            <Route path="/feed" element={<Feed/>}></Route>
-            <Route path="/signup" element={<SignUp/>}></Route>
-            <Route path="/profile" element={<Profile/>}></Route>
-            <Route path="/connections" element={<Connections/>}></Route>
-            <Route path="/requests" element={<Requests/>}></Route>
+            <Route path="/" element={<Hero />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/feed" element={<Feed />} />
+            <Route path="/signup" element={<SignUp />} />
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/connections" element={<Connections />} />
+            <Route path="/requests" element={<Requests />} />
+
+            {/* New Pages */}
+            <Route path="/about" element={<AboutUs />} />
+            <Route path="/contact" element={<Contact />} />
+            
+            <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+            <Route path="/terms-of-service" element={<TermsOfService />} />
+            <Route path="/refund-policy" element={<RefundPolicy />} />
+            <Route path="/faqs" element={<FAQs />} />
           </Route>
         </Routes>
       </BrowserRouter>
-      </Provider>
-    </>
+    </Provider>
   );
 }
 
