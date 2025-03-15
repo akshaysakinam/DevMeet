@@ -20,6 +20,9 @@ import PrivacyPolicy from "./PrivacyPolicy";
 import TermsOfService from "./TermsOfService";
 import RefundPolicy from "./RefundPolicy";
 import FAQs from "./FAQs";
+import Premium from "./Pricing.jsx";
+import Pricing from "./Pricing.jsx";
+import ShippingAndDelivery from "./ShippingAndDelivery.jsx";
 
 function App() {
   return (
@@ -43,6 +46,8 @@ function App() {
             <Route path="/terms-of-service" element={<TermsOfService />} />
             <Route path="/refund-policy" element={<RefundPolicy />} />
             <Route path="/faqs" element={<FAQs />} />
+            <Route path="/pricing" element={<Pricing/>} />
+            <Route path="/shippinganddelivery" element={<ShippingAndDelivery/>} />
           </Route>
         </Routes>
       </BrowserRouter>
