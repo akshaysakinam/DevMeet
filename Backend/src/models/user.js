@@ -47,6 +47,14 @@ const userSchema=new mongoose.Schema({
         }
         //validate function will run only for new documents incase if you dont use runvalidators explicitly in patch api. When we update or doing patch It wont work. So mention runvalidators
     },
+    isPremium:{
+        type:Boolean,
+        default:false
+    },
+    membershipType:{
+        type:String,
+
+    },
     photoUrl:{
         type:String,
         default:"https://img.favpng.com/17/24/10/computer-icons-user-profile-male-avatar-png-favpng-jhVtWQQbMdbcNCahLZztCF5wk.jpg",
@@ -72,7 +80,7 @@ userSchema.index({firstName:1,lastName:1})
 
 userSchema.methods.getJWT=async function(){
     const user=this;
-    const token=await jwt.sign({ _id: user._id }, "Akshay",{expiresIn:"1d"});
+    const token=await jwt.sign({ _id: user._id }, process.env.JWT_SECRET,{expiresIn:"1d"});
     return token
 }
 
