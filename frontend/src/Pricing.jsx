@@ -1,6 +1,7 @@
 import { CheckIcon } from "@heroicons/react/20/solid";
 import axios from "axios";
 import { BASE_URL } from "./utils/Constants";
+import { useEffect, useState } from "react";
 
 const tiers = [
   {
@@ -36,6 +37,24 @@ function classNames(...classes) {
 }
 
 export default function Pricing() {
+  const[isUserPremium,setIsUserPremium]=useState(false)
+
+  useEffect(()=>{
+    verifyPremiumUser()
+  },[])
+
+  const verifyPremiumUser=async()=>{
+    const res=await axios.get(BASE_URL+"/premium/verify",{withCredentials:true})
+    if(res.data.isPremium){
+      setIsUserPremium(true)
+    }
+
+  }
+
+
+
+
+
   const handleButtonClick = async (type) => {
     const order = await axios.post(
       BASE_URL + "/payment/create",
@@ -63,12 +82,13 @@ export default function Pricing() {
       theme: {
         color: "#F37254",
       },
+      handler:verifyPremiumUser,
     };
 
     const rzp = new window.Razorpay(options);
     rzp.open();
   };
-  return (
+  return isUserPremium ?"You are Already a Member": (
     <div className="relative isolate bg-white px-6 py-24 sm:py-32 lg:px-8">
       <div className="mx-auto max-w-4xl text-center">
         <h2 className="text-base font-semibold text-indigo-600">Pricing</h2>
